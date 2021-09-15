@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>BoolZapp</title>
+</head>
+<body>
+    <div id="root" class="container">
+
+        <div id="background_app">
+            <div id="app">
+
+                <div id="info_main" class="float">
+    
+                    <div id="user_in_info" class="flex between">
+    
+                        <div id="user_avatar" class="flex middle">
+                            <img :src="'img/avatar' + user.userAvatar + '.jpg'" alt="avatar User">
+                            <div>{{user.name}} {{user.surname}}</div>
+                        </div>
+    
+                        <form id="user_option" class="flex middle around">
+                            <button><i class="fas fa-circle-notch"></i></button>
+                            <button><i class="fas fa-comment-alt"></i></button>
+                            <button><i class="fas fa-ellipsis-v"></i></button>
+                        </form>
+    
+                    </div>
+        
+                    <div id="notifications" class="flex middle">
+    
+                        <div id="circle_notification" class="flex middle center">
+                            <i class="fas fa-bell-slash"></i>
+                        </div>
+    
+                        <div id="notification_text">
+    
+                            <div>
+                                Ricevi notifiche di nuovi messaggi
+                            </div>
+    
+                            <a href="https://faq.whatsapp.com/android/chats/how-to-manage-your-notifications/?lang=it">Attiva notifiche desktop</a>
+                        
+                        </div>
+                        
+                    </div>
+    
+                    <form id="search_input" class="flex center middle">
+                        <button><i class="fas fa-search"></i></button>
+                        <input type="search" placeholder="Cerca o inizia una nuova chat" >
+                    </form>  
+                    
+                    <div id="contact_info">
+                        <ul class="none"> 
+                            <li class="contact flex middle" :class="(i == currentContact) ? 'active' : null " v-for= '(contact, i) in contacts' @click='selected(i)'>
+                                <div class="avatar_image">
+                                    <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="avatar contact">
+                                </div>
+                                <div>
+                                    {{contact.name}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+    
+                </div>
+    
+                <div id="chat_main" class="float">
+    
+                    <div id="info_in_chat" class="flex between middle">
+    
+                        <div id="current_avatar" class="flex middle">
+                            <div class="avatar_image">
+                                <img :src="'img/avatar' + contacts[currentContact].avatar + '.jpg'" alt="avatar contact current">
+                            </div>
+                            <p class="user-name">{{ contacts[currentContact].name }}</p>
+                        </div>
+                        
+    
+                        <form id="chat_option" class="flex middle around">
+                            <button><i class="fas fa-search"></i></button>
+                            <button><i class="fas fa-paperclip"></i></button>
+                            <button><i class="fas fa-ellipsis-v"></i></button>
+                        </form>
+    
+                    </div>
+    
+                    <div id="chat_window">
+                        <ul class="flex_col none">
+                            <li id="boxMessage" :class="(message.status == 'sent') ? 'messageSent' : 'messageReceived'" v-for='message in contacts[currentContact].messages'>
+                                {{ message.message }} 
+                                <div class="dateMessage">
+                                    {{message.date}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div id="user_input" class="flex around middle">
+    
+                        <form id="emoticon" class="flex center">
+                            <button><i class="far fa-smile"></i></button>
+                        </form>
+    
+                        <input type="text" v-model="newMessage" placeholder="Scrivi un messaggio" @keyup.enter="UserNewMessage">
+    
+                        <form id="vocal_chat" class="flex center">
+                            <button><i class="fas fa-microphone"></i></i></button>
+                        </form>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+        </div>
+
+        
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./js/main.js"></script>
+
+</body>
+</html>
